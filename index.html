@@ -12,11 +12,11 @@
             --primary: #8b5cf6;
             --secondary: #d946ef;
             --bg: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.98);
         }
 
         body {
-            background: radial-gradient(circle at top, #1e1b4b, #0f172a);
+            background: #0f172a;
             font-family: 'Hind Siliguri', sans-serif;
             margin: 0;
             display: flex;
@@ -24,6 +24,7 @@
             align-items: center;
             min-height: 100vh;
             color: #1e293b;
+            overflow: hidden; /* স্ক্রলবার লুকানোর জন্য */
         }
 
         /* মেইন কার্ড */
@@ -32,11 +33,10 @@
             width: 90%;
             max-width: 420px;
             padding: 30px;
-            border-radius: 35px;
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+            border-radius: 30px;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
             text-align: center;
-            animation: fadeIn 0.8s ease-out;
-            border: 4px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
@@ -44,106 +44,73 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* ভেরিফাইড ব্যাজ */
+        /* ফুল স্ক্রিন রিভিল মোড */
+        #reveal-section {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: white;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
         .trust-badges {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .badge {
             background: #f0fdf4;
             color: #16a34a;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 50px;
             font-size: 11px;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             border: 1px solid #bbf7d0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .github-sec {
-            background: #f8fafc;
-            color: #334155;
-            border: 1px solid #e2e8f0;
-        }
-
-        h2 {
-            margin: 0 0 20px 0;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 28px;
-        }
-
-        /* ইনপুট ফিল্ডস */
         input, textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e2e8f0;
-            border-radius: 18px;
-            box-sizing: border-box;
-            background: #f8fafc;
-            font-size: 16px;
-            transition: 0.3s;
+            width: 100%; padding: 15px; margin: 10px 0;
+            border: 2px solid #e2e8f0; border-radius: 15px;
+            box-sizing: border-box; font-size: 16px;
         }
-
-        input:focus { border-color: var(--primary); outline: none; background: #fff; }
 
         .btn {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 18px;
-            width: 100%;
-            border-radius: 18px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-            margin-top: 15px;
-            transition: 0.3s;
+            color: white; border: none; padding: 16px; width: 100%;
+            border-radius: 15px; font-size: 18px; font-weight: bold;
+            cursor: pointer; box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+            margin-top: 10px;
         }
 
-        .btn:active { transform: scale(0.95); }
-
-        /* গিফট বক্স (Trust Box) */
         .gift-box {
-            padding: 30px;
-            border: 3px dashed var(--primary);
-            border-radius: 25px;
-            cursor: pointer;
-            background: #fdf2ff;
-            transition: 0.4s;
+            padding: 40px 20px; border: 3px dashed var(--primary);
+            border-radius: 25px; cursor: pointer; background: #fdf2ff;
             animation: bounce 2s infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .gift-box:hover { background: #fae8ff; border-style: solid; }
-
-        .gift-icon { font-size: 60px; display: block; margin-bottom: 10px; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         #output-text {
-            background: #fff;
-            padding: 15px;
+            flex-grow: 1; /* পুরো জায়গা দখল করবে */
+            background: #f8fafc;
+            padding: 20px;
             border-radius: 15px;
-            max-height: 250px;
             overflow-y: auto;
             text-align: left;
-            margin: 20px 0;
+            margin: 15px 0;
             white-space: pre-wrap;
-            border: 1px solid #ddd;
-            font-size: 15px;
-            color: #475569;
+            border: 1px solid #e2e8f0;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
         .hidden { display: none; }
@@ -151,43 +118,43 @@
 </head>
 <body>
 
-<div class="glass-card">
+<div class="glass-card" id="main-card">
     
-    <div class="trust-badges">
-        <div class="badge">
-            <img src="https://img.icons8.com/fluency/18/verified-badge.png"> ভেরিফাইড টুল
-        </div>
-        <div class="badge github-sec">
-            <img src="https://img.icons8.com/material-outlined/16/github.png"> GitHub Secured
-        </div>
-    </div>
-
     <div id="creator-section">
+        <div class="trust-badges">
+            <div class="badge"><img src="https://img.icons8.com/fluency/16/verified-badge.png"> ভেরিফাইড টুল</div>
+            <div class="badge" style="background:#f8fafc; color:#334155;"><img src="https://img.icons8.com/material-outlined/16/github.png"> GitHub Secured</div>
+        </div>
         <h2>ম্যাজিক বোম্বার 🚀</h2>
-        <input type="text" id="nameInput" placeholder="আপনার নাম (যেমন: ওমর)">
-        <textarea id="msgInput" rows="2" placeholder="আপনার গোপন মেসেজ..."></textarea>
-        <input type="number" id="countInput" placeholder="কতবার? (সর্বোচ্চ ৫০০০)" max="5000">
-        <button class="btn" onclick="generateMagicLink()">লিঙ্ক তৈরি ও শেয়ার</button>
+        <input type="text" id="nameInput" placeholder="আপনার নাম">
+        <textarea id="msgInput" rows="2" placeholder="আপনার মেসেজ..."></textarea>
+        <input type="number" id="countInput" placeholder="পরিমাণ (সর্বোচ্চ ৫০০০)">
+        <button class="btn" onclick="generateShortLink()">লিঙ্ক তৈরি ও শেয়ার</button>
     </div>
 
     <div id="gateway-section" class="hidden">
+        <div class="trust-badges">
+            <div class="badge"><img src="https://img.icons8.com/fluency/16/verified-badge.png"> সিকিউর ভিউ</div>
+            <div class="badge" style="background:#f8fafc; color:#334155;"><img src="https://img.icons8.com/material-outlined/16/github.png"> GitHub Verified</div>
+        </div>
         <div class="gift-box" onclick="handleReveal()">
-            <span class="gift-icon">🎁</span>
-            <h3 style="margin:0; color:#4a148c;"><span id="senderNameDisplay"></span> আপনার জন্য সারপ্রাইজ পাঠিয়েছেন!</h3>
-            <p style="color:#6b7280; font-size:14px; margin-top:10px;">মেসেজটি আনলক করতে বক্সে ক্লিক করুন</p>
+            <span style="font-size:60px;">🎁</span>
+            <h3><span id="senderNameDisplay" style="color:var(--primary);"></span> এর সারপ্রাইজ মেসেজ!</h3>
+            <p style="font-size:14px; color:#64748b;">দেখতে বক্সে ক্লিক করুন</p>
         </div>
     </div>
+</div>
 
-    <div id="reveal-section" class="hidden">
-        <h3 id="finalTitle" style="color:#1e293b;"></h3>
-        <div id="output-text"></div>
-        <button class="btn" onclick="copyResult()">সব টেক্সট কপি করুন</button>
-        <p style="margin-top:20px; font-size:14px; color:var(--primary); cursor:pointer; font-weight:bold;" onclick="location.href=window.location.pathname">নিজেও এমন লিঙ্ক বানান ➡️</p>
+<div id="reveal-section">
+    <div class="trust-badges">
+        <div class="badge" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">
+            <img src="https://img.icons8.com/fluency/16/verified-badge.png"> অফিসিয়াল গিটহাব টুল
+        </div>
     </div>
-
-    <footer style="margin-top:25px; font-size:11px; color:#94a3b8; letter-spacing: 1px;">
-        🛡️ ভেরিফাইড বাই গিটহাব কমিউনিটি
-    </footer>
+    <h3 id="finalTitle" style="text-align:center; margin-top:0;"></h3>
+    <div id="output-text"></div>
+    <button class="btn" onclick="copyResult()">সব টেক্সট কপি করুন</button>
+    <button class="btn" style="background:#64748b; margin-top:5px;" onclick="location.href=window.location.pathname">নিজেও বানান</button>
 </div>
 
 <script>
@@ -195,64 +162,61 @@
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const n = urlParams.get('n'), d = urlParams.get('d'), q = urlParams.get('q');
+        const s = urlParams.get('s'); // 's' for short combined data
 
-        if (n && d && q) {
+        if (s) {
             document.getElementById('creator-section').classList.add('hidden');
             document.getElementById('gateway-section').classList.remove('hidden');
             
-            const decodedName = decodeURIComponent(atob(n));
-            const decodedMsg = decodeURIComponent(atob(d));
-            const count = Math.min(parseInt(q), 5000);
-            
-            document.getElementById('senderNameDisplay').innerText = decodedName;
-            document.getElementById('finalTitle').innerText = decodedName + " এর সারপ্রাইজ মেসেজ";
-            finalPayload = new Array(count).fill(decodedMsg).join("\n");
+            try {
+                // একটি মাত্র প্যারামিটার থেকে সব ডেটা ডিকোড করা
+                const decodedData = decodeURIComponent(atob(s)).split('|');
+                const name = decodedData[0];
+                const msg = decodedData[1];
+                const count = Math.min(parseInt(decodedData[2]), 5000);
+                
+                document.getElementById('senderNameDisplay').innerText = name;
+                document.getElementById('finalTitle').innerText = name + " এর মেসেজ";
+                finalPayload = new Array(count).fill(msg).join("\n");
+            } catch(e) { console.log("Invalid Link"); }
         }
     }
 
-    function generateMagicLink() {
+    function generateShortLink() {
         const name = document.getElementById('nameInput').value;
         const msg = document.getElementById('msgInput').value;
         const count = document.getElementById('countInput').value;
 
-        if(!name || !msg || !count) return alert("ওমর, তথ্যগুলো সঠিকভাবে দিন!");
+        if(!name || !msg || !count) return alert("সব তথ্য দিন ওমর!");
 
-        const encodedName = btoa(encodeURIComponent(name));
-        const encodedMsg = btoa(encodeURIComponent(msg));
-        const finalUrl = `${window.location.href.split('?')[0]}?n=${encodedName}&d=${encodedMsg}&q=${count}`;
+        // ৩টি ডেটাকে ১টি স্ট্রিং এ রূপান্তর করে ছোট করা
+        const combined = `${name}|${msg}|${count}`;
+        const encoded = btoa(encodeURIComponent(combined));
+        const finalUrl = `${window.location.href.split('?')[0]}?s=${encoded}`;
 
         if (navigator.share) {
             navigator.share({
-                title: 'ম্যাজিক সারপ্রাইজ',
-                text: `${name} আপনার জন্য একটি ভেরিফাইড সারপ্রাইজ পাঠিয়েছেন! দেখুন এখানে:`,
+                title: 'Surprise',
+                text: `${name} আপনার জন্য সারপ্রাইজ পাঠিয়েছেন!`,
                 url: finalUrl
             });
         } else {
             navigator.clipboard.writeText(finalUrl);
-            alert("লিঙ্কটি কপি করা হয়েছে!");
+            alert("লিঙ্ক কপি হয়েছে!");
         }
     }
 
     function handleReveal() {
-        // কনফেটি এনিমেশন
-        confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#8b5cf6', '#d946ef', '#22c55e']
-        });
-
-        setTimeout(() => {
-            document.getElementById('gateway-section').classList.add('hidden');
-            document.getElementById('reveal-section').classList.remove('hidden');
-            document.getElementById('output-text').innerText = finalPayload;
-        }, 500);
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        
+        document.getElementById('main-card').style.display = 'none';
+        document.getElementById('reveal-section').style.display = 'flex';
+        document.getElementById('output-text').innerText = finalPayload;
     }
 
     function copyResult() {
         navigator.clipboard.writeText(finalPayload);
-        alert("সবগুলো টেক্সট কপি হয়েছে!");
+        alert("সব কপি হয়েছে!");
     }
 </script>
 
